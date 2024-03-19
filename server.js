@@ -16,10 +16,10 @@ app.get("/", (req, res) => {
 
 app.post("/postBlog", async (req, res) => {
   try {
-    const { date, title, category, content } = req.body;
+    const { title, blogcontent, category, date } = req.body;
     const result = await pool.query(
       "INSERT INTO blogdata (title, blogcontent, category, date) VALUES ($1, $2, $3, $4) RETURNING *",
-      [date, title, category, content]
+      [title, blogcontent, category, date]
     );
     res.json(result.rows[0]);
   } catch (error) {
